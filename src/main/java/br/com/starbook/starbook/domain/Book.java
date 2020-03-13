@@ -1,18 +1,37 @@
 package br.com.starbook.starbook.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @Entity
 public class Book {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private int idBook;
+
+    @ManyToMany
+    Set<User> books;
+
+    public Set<User> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<User> books) {
+        this.books = books;
+    }
+
+    @NotEmpty
+    @Column(nullable = false)
     private String title;
+
+    @NotEmpty
+    @Column(nullable = false)
     private String code;
+
+    @NotEmpty
+    @Column(nullable = false)
     private String author;
 
     public Book(String title, String code, String author) {
@@ -29,12 +48,12 @@ public class Book {
         return title;
     }
 
-    public int getId() {
-        return id;
+    public int getIdBook() {
+        return idBook;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdBook(int idBook) {
+        this.idBook = idBook;
     }
 
     public void setTitle(String title) {

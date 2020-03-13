@@ -1,17 +1,56 @@
 package br.com.starbook.starbook.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
+@Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    private int idUser;
+
+    @ManyToMany
+    Set<Booking> users;
+
+    @ManyToMany
+    @JoinTable(name = "bookingJoin",
+    joinColumns = @JoinColumn(name = "userId"),
+    inverseJoinColumns = @JoinColumn(name = "bookId"))
+    Set<Booking> bookins;
+
+    public Set<Booking> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<Booking> users) {
+        this.users = users;
+    }
+
+    @NotEmpty
+    @Column(nullable = false)
     private String nickname;
+
+    @NotEmpty
+    @Column(nullable = false)
     private String email;
+
+    @NotEmpty
+    @Column(nullable = false)
     private String password;
+
+    @NotEmpty
+    @Column(nullable = false)
     private String token;
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
 
     public String getNickname() {
         return nickname;
