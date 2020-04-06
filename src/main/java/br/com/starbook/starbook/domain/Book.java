@@ -2,7 +2,6 @@ package br.com.starbook.starbook.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.Set;
 
 @Entity
 public class Book {
@@ -11,32 +10,21 @@ public class Book {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int idBook;
 
-    @ManyToMany
-    Set<User> books;
-
-    public Set<User> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<User> books) {
-        this.books = books;
-    }
-
     @NotEmpty
     @Column(nullable = false)
     private String title;
 
     @NotEmpty
     @Column(nullable = false)
-    private String code;
+    private String bookCode;
 
     @NotEmpty
     @Column(nullable = false)
     private String author;
 
-    public Book(String title, String code, String author) {
+    public Book(String title, String bookCode, String author) {
         this.title = title;
-        this.code = code;
+        this.bookCode = bookCode;
         this.author = author;
     }
 
@@ -60,12 +48,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getCode() {
-        return code;
+    public String getBookCode() {
+        return bookCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setBookCode(String bookCode) {
+        this.bookCode = bookCode;
     }
 
     public String getAuthor() {

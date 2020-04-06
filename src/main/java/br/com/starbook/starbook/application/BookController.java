@@ -1,15 +1,10 @@
 package br.com.starbook.starbook.application;
 
-import br.com.starbook.starbook.domain.Book;
-import br.com.starbook.starbook.domain.BookRepository;
-import br.com.starbook.starbook.domain.Booking;
+import br.com.starbook.starbook.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -26,19 +21,10 @@ public class BookController {
     public Iterable<Book> getBooks() {
         return bookRepository.findAll();
     }
-    @PostMapping("/books")
-    public void booking(@PathVariable int idBook, @PathVariable int idUser) {
-
-        /*Calendar reservationDay =  Calendar.getInstance();
-        Calendar calendar =  Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 20);
-        Date finalDayForDevolution = calendar.getTime();*/
-
-    }
 
     @PostMapping("/books")
     public Book registerBooks(@RequestBody Book book) {
-        Book bookToSave = new Book(book.getTitle(), book.getCode(), book.getAuthor());
+        Book bookToSave = new Book(book.getTitle(), book.getBookCode(), book.getAuthor());
         return bookRepository.save(bookToSave);
     }
 
@@ -50,7 +36,7 @@ public class BookController {
 
             Book editBook = editBookOptional.get();
             editBook.setTitle(book.getTitle());
-            editBook.setCode(book.getCode());
+            editBook.setBookCode(book.getBookCode());
             editBook.setAuthor(book.getAuthor());
             return bookRepository.save(editBook);
 
