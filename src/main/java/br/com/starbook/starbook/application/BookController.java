@@ -47,6 +47,7 @@ public class BookController {
 
     }
 
+
     @DeleteMapping("/books/{id}")
     public void deleteBook(@PathVariable Integer id) {
 
